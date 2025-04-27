@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
-// 🔒 Vérifie le token et attache l'utilisateur à req.user
+// Vérifie le token et attache l'utilisateur à req.user
 export const protect = async (req, res, next) => {
   let token;
 
@@ -22,7 +22,7 @@ export const protect = async (req, res, next) => {
   }
 };
 
-// 🔐 Autorise uniquement les admins
+// Autorise uniquement les admins
 export const adminOnly = (req, res, next) => {
   if (req.user && req.user.role === 'admin') {
     next();

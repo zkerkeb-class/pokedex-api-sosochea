@@ -8,7 +8,8 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "generate-pokemons": "node src/data/generatePokemonsJson.js",
-    "import-data": "node src/scripts/importData.js"
+    "import-data": "node src/scripts/importData.js",
+    "migrate-types": "node migrateTypes.js"
   },
   "dependencies": {
     "axios": "^1.8.4",

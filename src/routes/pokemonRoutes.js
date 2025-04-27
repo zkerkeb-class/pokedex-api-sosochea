@@ -4,7 +4,7 @@ import { protect, adminOnly } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-// GET - Tous les Pokémon
+// Tous les pokémons
 router.get('/', async (req, res) => {
   try {
     const pokemons = await Pokemon.find();
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET - Un Pokémon par ID
+// Un pokémon par ID
 router.get('/:id', async (req, res) => {
   try {
     const pokemon = await Pokemon.findOne({ id: req.params.id });
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST - Nouveau Pokémon
+// Créer un pokémon
 router.post('/', protect, async (req, res) => {
   try {
     const existing = await Pokemon.findOne({ id: req.body.id });
@@ -43,7 +43,7 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
-// PUT - Modifier un Pokémon
+// Modifier un pokémon
 router.put('/:id', protect, async (req, res) => {
   try {
     const updated = await Pokemon.findOneAndUpdate(
@@ -62,7 +62,7 @@ router.put('/:id', protect, async (req, res) => {
   }
 });
 
-// DELETE - Supprimer un Pokémon
+// Supprimer un pokémon
 router.delete('/:id', protect, adminOnly, async (req, res) => {
   try {
     const deleted = await Pokemon.findOneAndDelete({ id: req.params.id });

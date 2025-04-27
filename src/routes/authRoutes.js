@@ -4,17 +4,17 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
-// 🔐 Génération d'un JWT
 const generateToken = (user) => {
   return jwt.sign(
-    { id: user._id, email: user.email, role: user.role },
+    { id: user._id, name: user.name, email: user.email, role: user.role },
     process.env.JWT_SECRET,
     { expiresIn: '1h' }
   );
 };
 
-// 📌 Route POST /api/register
+// 📌 Inscription
 router.post('/register', async (req, res) => {
+  console.log('Reçu côté backend :', req.body);
   const { name, email, password } = req.body;
 
   try {
@@ -26,6 +26,7 @@ router.post('/register', async (req, res) => {
 
     res.status(201).json({
       _id: user._id,
+      name: user.name,
       email: user.email,
       role: user.role,
       token: generateToken(user)
@@ -35,7 +36,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// 📌 Route POST /api/login
+// 📌 Connexion
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -47,6 +48,7 @@ router.post('/login', async (req, res) => {
 
     res.json({
       _id: user._id,
+      name: user.name,
       email: user.email,
       role: user.role,
       token: generateToken(user)
